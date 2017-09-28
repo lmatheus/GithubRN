@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry } from 'react-native';
+import { AppRegistry, NavigatorIOS } from 'react-native';
 import {
   ApolloClient,
   ApolloProvider,
@@ -11,7 +11,7 @@ const networkInterface = createNetworkInterface({
   uri: 'https://api.github.com/graphql'
 });
 
-const TOKEN = 'e2b304160dee781dd8fae6eac8334eed2f422d5a';
+const TOKEN = 'ea8a79ffd2dba39f4d1b38efdbdff380bd755b7c';
 
 networkInterface.use([
   {
@@ -35,7 +35,13 @@ class GithubRN extends Component {
   render() {
     return (
       <ApolloProvider client={client}>
-        <App />
+        <NavigatorIOS
+          initialRoute={{
+            component: App,
+            title: 'Top 10 Repos'
+          }}
+          style={{ flex: 1 }}
+        />
       </ApolloProvider>
     );
   }

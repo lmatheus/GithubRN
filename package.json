@@ -12,7 +12,9 @@
 		"react": "16.0.0-alpha.12",
 		"react-apollo": "^1.4.16",
 		"react-native": "0.48.4",
-		"react-native-search-bar": "^3.0.0"
+		"react-native-search-bar": "^3.0.0",
+		"recompose": "^0.25.1",
+		"styled-components": "^2.2.0"
 	},
 	"devDependencies": {
 		"babel-jest": "21.2.0",

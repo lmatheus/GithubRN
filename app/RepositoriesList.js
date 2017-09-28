@@ -1,47 +1,39 @@
 import React from 'react';
-import {
-  StyleSheet,
-  FlatList,
-  View,
-  Text,
-  ActivityIndicator
-} from 'react-native';
+import styled from 'styled-components/native';
+import { compose, pure } from 'recompose';
+import { FlatList, Text, ActivityIndicator } from 'react-native';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
-const styles = StyleSheet.create({
-  repo: {
-    flex: 1,
-    marginLeft: 15,
-    marginRight: 15,
-    marginTop: 7,
-    padding: 14,
-    backgroundColor: 'white',
-    borderWidth: 1,
-    borderColor: 'lightgray',
-    height: 48,
-    textAlign: 'left',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 1,
-      height: 2
-    },
-    shadowRadius: 4,
-    shadowOpacity: 0.5
-  },
-  list: {
-    marginTop: 12
-  }
-});
+const StyledActivityIndicator = styled.ActivityIndicator`margin-top: 50%;`;
+
+const Repo = styled.Text`
+  flex: 1;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 5px;
+  padding: 14px;
+  background: white;
+  border: 1px solid lightgray;
+  height: 48px;
+  shadow-color: #000;
+  shadow-offset: 1px 2px;
+  shadow-radius: 4px;
+  shadow-opacity: 0.5;
+`;
+
+const StyledRepositoryList = styled.FlatList`
+  margin-top: 7px;
+  height: 100%;
+`;
 
 const RepositoriesList = ({ loading, repositories }) => {
   if (loading) {
-    return <ActivityIndicator size={'large'} style={{ marginTop: '50%' }} />;
+    return <StyledActivityIndicator size={'large'} />;
   }
   return (
-    <FlatList
-      style={styles.list}
-      renderItem={({ item }) => <Text style={styles.repo}>{item.name}</Text>}
+    <StyledRepositoryList
+      renderItem={({ item }) => <Repo>{item.name}</Repo>}
       keyExtractor={({ id }) => id}
       data={repositories}
     />
@@ -63,11 +55,11 @@ const query = gql`
   }
 `;
 
-const withInfo = graphql(query, {
-  options: ({ login }) => {
+const data = graphql(query, {
+  options: ({ username }) => {
     return {
       variables: {
-        login
+        login: username
       }
     };
   },
@@ -97,6 +89,4 @@ const withInfo = graphql(query, {
   }
 });
 
-const RepositoriesListWithInfo = withInfo(RepositoriesList);
-
-export default RepositoriesListWithInfo;
+export default compose(pure, data)(RepositoriesList);
