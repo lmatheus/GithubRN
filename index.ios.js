@@ -1,10 +1,11 @@
 import React from 'react';
-import { AppRegistry, NavigatorIOS } from 'react-native';
+import { AppRegistry, NavigatorIOS, View, Text } from 'react-native';
 import {
   ApolloClient,
   ApolloProvider,
   createNetworkInterface
 } from 'react-apollo';
+import styled from 'styled-components/native';
 import App from './app/App';
 
 const networkInterface = createNetworkInterface({
@@ -31,16 +32,34 @@ const client = new ApolloClient({
   networkInterface
 });
 
-const GithubRN = () => (
-  <ApolloProvider client={client}>
-    <NavigatorIOS
-      initialRoute={{
-        component: App,
-        title: 'Top 10 Repos'
-      }}
-      style={{ flex: 1 }}
-    />
-  </ApolloProvider>
-);
+const TokenMessage = styled.View`
+  margin-top: 50px;
+  padding: 0 25px;
+  background: white;
+`;
+
+const GithubRN = () => {
+  if (TOKEN) {
+    return (
+      <ApolloProvider client={client}>
+        <NavigatorIOS
+          initialRoute={{
+            component: App,
+            title: 'Top 10 Repos'
+          }}
+          style={{ flex: 1 }}
+        />
+      </ApolloProvider>
+    );
+  } else {
+    return (
+      <TokenMessage>
+        <Text>
+          Please set the your Github Private Token on index.ios.js line 14
+        </Text>
+      </TokenMessage>
+    );
+  }
+};
 
 AppRegistry.registerComponent('GithubRN', () => GithubRN);
