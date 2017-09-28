@@ -55,7 +55,7 @@ const GithubRN = () => {
     return (
       <TokenMessage>
         <Text>
-          Please set the your Github Private Token on index.ios.js line 14
+          Please set your Github Private Token on index.ios.js line 14
         </Text>
       </TokenMessage>
     );
