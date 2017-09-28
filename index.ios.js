@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { AppRegistry, NavigatorIOS } from 'react-native';
 import {
   ApolloClient,
@@ -11,7 +11,7 @@ const networkInterface = createNetworkInterface({
   uri: 'https://api.github.com/graphql'
 });
 
-const TOKEN = 'ea8a79ffd2dba39f4d1b38efdbdff380bd755b7c';
+const TOKEN = null;
 
 networkInterface.use([
   {
@@ -31,20 +31,16 @@ const client = new ApolloClient({
   networkInterface
 });
 
-class GithubRN extends Component {
-  render() {
-    return (
-      <ApolloProvider client={client}>
-        <NavigatorIOS
-          initialRoute={{
-            component: App,
-            title: 'Top 10 Repos'
-          }}
-          style={{ flex: 1 }}
-        />
-      </ApolloProvider>
-    );
-  }
-}
+const GithubRN = () => (
+  <ApolloProvider client={client}>
+    <NavigatorIOS
+      initialRoute={{
+        component: App,
+        title: 'Top 10 Repos'
+      }}
+      style={{ flex: 1 }}
+    />
+  </ApolloProvider>
+);
 
 AppRegistry.registerComponent('GithubRN', () => GithubRN);
