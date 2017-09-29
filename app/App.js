@@ -4,14 +4,13 @@ import { View } from 'react-native';
 import styled from 'styled-components/native';
 import RepositoriesList from './RepositoriesList';
 import SearchBox from './SearchBox';
+import Header from './Header';
 
-const AppContainer = styled.View`
-  padding-top: 65px;
-  background: white;
-`;
+const AppContainer = styled.View`background: white;`;
 
 const App = ({ username, handleSearch }) => (
   <AppContainer>
+    <Header />
     <SearchBox handleSearch={handleSearch} />
     <RepositoriesList username={username} />
   </AppContainer>

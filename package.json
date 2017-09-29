@@ -9,6 +9,7 @@
 	"dependencies": {
 		"graphql-tag": "^2.4.2",
 		"lodash": "^4.17.4",
+		"native-base": "^2.3.2",
 		"react": "16.0.0-alpha.12",
 		"react-apollo": "^1.4.16",
 		"react-native": "0.48.4",

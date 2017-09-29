@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppRegistry, NavigatorIOS, View, Text } from 'react-native';
+import { AppRegistry, View, Text } from 'react-native';
 import {
   ApolloClient,
   ApolloProvider,
@@ -42,13 +42,7 @@ const GithubRN = () => {
   if (TOKEN) {
     return (
       <ApolloProvider client={client}>
-        <NavigatorIOS
-          initialRoute={{
-            component: App,
-            title: 'Top 10 Repos'
-          }}
-          style={{ flex: 1 }}
-        />
+        <App />
       </ApolloProvider>
     );
   } else {
